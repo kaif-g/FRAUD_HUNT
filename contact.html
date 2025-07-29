@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=2.0">
+  <title>Contact Us</title>
+  <link rel="stylesheet" href="contact.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  <link rel="stylesheet" href="home.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <img id="logo" src="logo.png.png" alt="LOGO" />
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="about.html">ABOUT</a></li>
+        <li><a href="contact.html">CONTACT</a></li>
+        <li><a href="login.html">LOGIN</a></li>
+        <li><a href="signup.html">SIGNUP</a></li>
+        <li><a href="forget.html">FORGOT PASSWORD</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="contact">
+    <div class="header">
+      <h2 data-aos="fade-right">📬 Contact Us</h2>
+      <p data-aos="fade-left">Fraudhunt - Report scams or suspicious activity using the form below.</p>
+    </div>
+
+    <div class="container" data-aos="zoom-in-up">
+      <div class="info_container">
+        <div class="location info_item">
+          <div class="icon"><i class="fa-solid fa-location-dot"></i></div>
+          <div class="information">
+            <h4>Location:</h4>
+            <p>12 Church Street, New York, USA</p>
+          </div>
+        </div>
+        <div class="email info_item">
+          <div class="icon"><i class="fa-solid fa-envelope"></i></div>
+          <div class="information">
+            <h4>Email:</h4>
+            <p>fraudhunt@gmail.com</p>
+          </div>
+        </div>
+        <div class="call info_item">
+          <div class="icon"><i class="fa-solid fa-phone"></i></div>
+          <div class="information">
+            <h4>Call:</h4>
+            <p>+1-9009-8008-70</p>
+          </div>
+        </div>
+        <div class="open_hours info_item">
+          <div class="icon"><i class="fa-solid fa-globe"></i></div>
+          <div class="information">
+            <h4>Website:</h4>
+            <p>www.fraudhunt.com</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="input_container">
+        <form>
+          <div class="row">
+            <input type="text" class="form_control" placeholder="Your Name" required>
+            <input type="email" class="form_control" placeholder="Email Address" required>
+          </div>
+          <input type="text" placeholder="Subject" class="form_control" required>
+          <textarea cols="30" rows="7" class="form_control" placeholder="Message" required></textarea>
+          <div class="btn"><button type="submit">Send Message</button></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init();</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="login.css" />
+  <link rel="stylesheet" href="home.css" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  <title>Login</title>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <img id="logo" src="logo.png.png" alt="LOGO" />
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="about.html">ABOUT</a></li>
+        <li><a href="contact.html">CONTACT</a></li>
+        <li><a href="login.html">LOGIN</a></li>
+        <li><a href="signup.html">SIGNUP</a></li>
+        <li><a href="forget.html">FORGOT PASSWORD</a></li>
+      </ul>
+    </nav>
+  </header>
+  <form data-aos="flip-up">
+    <div class="loginmaincontainer">
+      <div class="loginimage"></div>
+      <div class="login">
+        <h2 style="color:#333;">🔐 Login to Account</h2>
+        <div class="usecontainer">
+          <input type="text" id="userName" placeholder="Username" required />
+          <img src="./people.png" class="profileimg" />
+        </div>
+        <div class="usecontainer">
+          <input type="password" id="userPassword" placeholder=" Password" required />
+          <img src="./padlock.png" class="userpassword" />
+        </div>
+        <div class="btncontainer">
+          <button type="submit">Login</button>
+          <a href="forget.html">Forgot Password?</a>
+        </div>
+        <a href="signup.html">Create Your Account</a>
+      </div>
+    </div>
+  </form>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init();</script>
+</body>
+</html>
