@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=2.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact Us</title>
-  <link rel="stylesheet" href="contact.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
+  <link rel="stylesheet" href="contact.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
   <link rel="stylesheet" href="home.css" />
+
+  <!-- ✅ EmailJS v3 SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script>
+    // ✅ Initialize EmailJS with your public key
+    emailjs.init("bWdsr_VE8QT2bfwaO");
+  </script>
 </head>
 <body>
   <header>
@@ -63,20 +70,38 @@
       </div>
 
       <div class="input_container">
-        <form>
+        <form id="contactForm">
           <div class="row">
-            <input type="text" class="form_control" placeholder="Your Name" required>
-            <input type="email" class="form_control" placeholder="Email Address" required>
+            <!-- ✅ Use name attributes for EmailJS -->
+            <input type="text" class="form_control" name="from_name" placeholder="Your Name" required />
+            <input type="email" class="form_control" name="from_email" placeholder="Email Address" required />
           </div>
-          <input type="text" placeholder="Subject" class="form_control" required>
-          <textarea cols="30" rows="7" class="form_control" placeholder="Message" required></textarea>
+          <input type="text" class="form_control" name="subject" placeholder="Subject" required />
+          <textarea name="message" class="form_control" cols="30" rows="7" placeholder="Message" required></textarea>
           <div class="btn"><button type="submit">Send Message</button></div>
         </form>
       </div>
     </div>
   </section>
 
+  <!-- AOS Animation -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>AOS.init();</script>
+
+  <!-- ✅ EmailJS Form Handling -->
+  <script>
+    document.getElementById("contactForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      emailjs.sendForm("service_ko4osfj", "template_0n5jhhk", this)
+        .then(function () {
+          alert("✅ Your message has been sent successfully!");
+          document.getElementById("contactForm").reset();
+        }, function (error) {
+          alert("❌ Failed to send message. Please try again.");
+          console.error("EmailJS Error:", error);
+        });
+    });
+  </script>
 </body>
 </html>

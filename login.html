@@ -22,7 +22,8 @@
       </ul>
     </nav>
   </header>
-  <form data-aos="flip-up">
+
+  <form data-aos="flip-up" onsubmit="return loginUser(event)">
     <div class="loginmaincontainer">
       <div class="loginimage"></div>
       <div class="login">
@@ -43,7 +44,39 @@
       </div>
     </div>
   </form>
+
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>AOS.init();</script>
+
+  <script>
+   function loginUser(event) {
+  event.preventDefault();
+  const userData = JSON.parse(localStorage.getItem("userData"));
+  const usernameInput = document.getElementById("userName").value;
+  const passwordInput = document.getElementById("userPassword").value;
+
+  if (!userData) {
+    alert("No account found. Please sign up first.");
+    return false;
+  }
+
+  const storedEmail = userData.email;
+  const storedPhone = userData.phone;
+  const storedPassword = userData.password;
+
+  if (
+    (usernameInput === storedEmail || usernameInput === storedPhone) &&
+    passwordInput === storedPassword
+  ) {
+    alert("Login successful!");
+    window.location.href = "index.html";  // ✅ Redirect to homepage
+  } else {
+    alert("Invalid username or password.");
+  }
+
+  return false;
+}
+
+  </script>
 </body>
 </html>

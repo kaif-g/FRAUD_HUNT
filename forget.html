@@ -6,6 +6,10 @@
   <link rel="stylesheet" href="forget.css" />
   <link rel="stylesheet" href="home.css" />
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+  <script>
+    emailjs.init("bWdsr_VE8QT2bfwaO"); // ✅ Your EmailJS Public Key (User ID)
+  </script>
   <title>Forget Password</title>
 </head>
 <body>
@@ -64,25 +68,86 @@
   </div>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
   <script>
     AOS.init();
 
+    let generatedEmailOTP = "";
+    let generatedMobileOTP = "";
+
+    function generateOTP() {
+      return Math.floor(100000 + Math.random() * 900000).toString();
+    }
+
     function sendOTP() {
-      // Backend integration can be placed here
-      document.getElementById('otp-section').style.display = 'block';
-      alert("OTP sent to your Email and Mobile.");
+      const email = document.getElementById('user_email').value.trim();
+      const phone = document.getElementById('user_mobile').value.trim();
+
+      if (!email || !phone) {
+        alert("Please enter both email and mobile number.");
+        return;
+      }
+
+      const storedData = JSON.parse(localStorage.getItem("userData"));
+
+      if (!storedData) {
+        alert("No user data found. Please register first.");
+        return;
+      }
+
+      if (email !== storedData.email || phone !== storedData.phone) {
+        alert("Email or mobile number does not match our records.");
+        return;
+      }
+
+      // Generate OTPs only after validation
+      generatedEmailOTP = generateOTP();
+      generatedMobileOTP = generateOTP();
+
+      // Send OTP via EmailJS
+      emailjs.send("service_ko4osfj", "template_y7gy843", {
+        to_email: email,
+        to_name: storedData.full_name,
+        email_otp: generatedEmailOTP,
+        mobile_otp: generatedMobileOTP
+      })
+      .then(() => {
+        alert("OTPs sent to your registered email.");
+        document.getElementById('otp-section').style.display = 'block';
+      })
+      .catch((error) => {
+        console.error("EmailJS Error:", error);
+        alert("Failed to send OTPs. Please check your EmailJS configuration.");
+      });
     }
 
     function verifyAndReset() {
-      const password = document.getElementById('new_password').value;
+      const emailOTPInput = document.getElementById('email_otp').value.trim();
+      const mobileOTPInput = document.getElementById('mobile_otp').value.trim();
+      const newPassword = document.getElementById('new_password').value;
       const confirmPassword = document.getElementById('confirm_password').value;
-      if (password !== confirmPassword) {
+
+      if (!emailOTPInput || !mobileOTPInput || !newPassword || !confirmPassword) {
+        alert("All fields are required.");
+        return;
+      }
+
+      if (emailOTPInput !== generatedEmailOTP || mobileOTPInput !== generatedMobileOTP) {
+        alert("Invalid OTP(s). Please check and try again.");
+        return;
+      }
+
+      if (newPassword !== confirmPassword) {
         alert("Passwords do not match.");
         return;
       }
 
-      // Perform verification logic and backend update
-      alert("Password has been successfully reset.");
+      const storedData = JSON.parse(localStorage.getItem("userData"));
+      storedData.password = newPassword;
+      localStorage.setItem("userData", JSON.stringify(storedData));
+
+      alert("Password reset successful.");
+      window.location.href = "login.html";
     }
   </script>
 </body>
